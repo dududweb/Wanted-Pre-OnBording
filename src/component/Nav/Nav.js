@@ -1,6 +1,8 @@
 import React from "react";
 import SearchIcon from "../../asset/images/nav/searchicon.svg";
 import AlertIcon from "../../asset/images/nav/alerticon.svg";
+import RightArrow from "../../asset/images/nav/rightarrow.svg";
+import LeftArrow from "../../asset/images/nav/leftarrow.svg";
 
 function Nav() {
   return (
@@ -22,6 +24,8 @@ function Nav() {
       <div>
         <img src={SearchIcon} />
         <img src={AlertIcon} />
+        <img src={RightArrow} />
+        <img src={LeftArrow} />
       </div>
       <div>2</div>
       <div>3</div>
