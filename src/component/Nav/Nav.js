@@ -11,34 +11,38 @@ function Nav() {
   return (
     <div className="">
       <nav className="flex justify-between items-center max-w-screen-lg mx-auto py-4">
-        <div className="flex justify-between items-center w-36">
-          <img className="w-6" src={Menu} alt="menu" />
-          <h1 className="w-28">
+        <div className="flex justify-between items-center">
+          <img className="w-4 mr-2" src={Menu} alt="menu" />
+          <h1 className="w-24">
             <img src={Logo} alt="logo" />
           </h1>
         </div>
-        <ul className="flex">
+        <ul className="flex text-base">
           {CATEGORIES.map((category_list) => {
             return (
-              <li className="pr-7" key={category_list.id}>
+              <li className="pr-10" key={category_list.id}>
                 <p>{category_list.category}</p>
               </li>
             );
           })}
         </ul>
-        <ul className="flex justify-between items-center">
-          <li>
+        <ul className="flex justify-between items-center text-xs">
+          <li className="mr-2">
             <img src={SearchIcon} alt="searchicon" />
           </li>
-          <li>
+          <li className="mr-2">
             <img src={AlertIcon} alt="searchicon" />
           </li>
-          <li className="rounded-full overflow-hidden">
+          <li className="rounded-full overflow-hidden mr-2">
             <img className="w-8" src={Profile} alt="profileimg" />
           </li>
-          <li className="flex border-gray border-solid border rounded-full">
-            <p className="p">|</p>
-            <p className="p-2">기업서비스</p>
+          <li className="flex justify-between items-center">
+            <a
+              href="/"
+              className="before:content-['|'] before:m-4 flex justify-between items-center border-gray border-solid border rounded-full"
+            >
+              <p className="p-2">기업서비스</p>
+            </a>
           </li>
         </ul>
       </nav>
