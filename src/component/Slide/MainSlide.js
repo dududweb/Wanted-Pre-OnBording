@@ -6,8 +6,8 @@ import RightArrow from "../../asset/images/slide/rightarrow.svg";
 
 function MainSlide({ data }) {
   return (
-    <div className="slide">
-      <div className="relative flex justify-between items-center w-full flex-none overflow-hidden">
+    <div className="slide w-full">
+      <div className="relative flex justify-between items-center w-full mx-auto overflow-hidden">
         {data &&
           data.map((list) => {
             return (

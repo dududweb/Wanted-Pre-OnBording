@@ -6,7 +6,7 @@ import MainSlide from "../../component/Slide/MainSlide";
 function Main() {
   const url = "./data/slidedata.json";
   const { data, loading, error } = useAxios(url);
-  console.log(data);
+
   return (
     <div className="Main">
       <div>{<MainSlide data={data} />}</div>
