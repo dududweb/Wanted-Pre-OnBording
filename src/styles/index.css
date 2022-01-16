@@ -1,5 +1,10 @@
 @tailwind base;
 @layer base {
 }
+@layer utilities {
+  .w-9540px {
+    width: 9540px;
+  }
+}
 @tailwind components;
 @tailwind utilities;

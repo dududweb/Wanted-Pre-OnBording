@@ -10,7 +10,7 @@ import Profile from "../../asset/images/nav/profile_default.png";
 function Nav() {
   return (
     <div className="border-b">
-      <nav className="max-w-screen-xl flex justify-between items-center mx-auto py-4">
+      <nav className="max-w-6xl flex justify-between items-center mx-auto py-4">
         <div className="flex justify-between items-center">
           <img className="w-5 mr-5" src={Menu} alt="menu" />
           <h1 className="w-28">

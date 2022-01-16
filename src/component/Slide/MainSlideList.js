@@ -2,8 +2,8 @@ import { useEffect } from "react";
 
 function MainSlideList({ title, contents, image }) {
   return (
-    <div className="w-1060px\\">
-      <div>
+    <div className="max-w-screen-xl">
+      <div className="w-full">
         <img src={image} alt={title} />
       </div>
       <div className="w-52">
