@@ -1,3 +1,5 @@
+import Nav from "../../component/Nav/Nav";
+
 function Main() {
   return (
     <div className="Main">

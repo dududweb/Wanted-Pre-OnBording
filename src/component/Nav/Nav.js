@@ -9,11 +9,11 @@ import Profile from "../../asset/images/nav/profile_default.png";
 
 function Nav() {
   return (
-    <div className="">
-      <nav className="flex justify-between items-center max-w-screen-lg mx-auto py-4">
+    <div className="border-b">
+      <nav className="max-w-screen-xl flex justify-between items-center mx-auto py-4">
         <div className="flex justify-between items-center">
-          <img className="w-4 mr-2" src={Menu} alt="menu" />
-          <h1 className="w-24">
+          <img className="w-5 mr-5" src={Menu} alt="menu" />
+          <h1 className="w-28">
             <img src={Logo} alt="logo" />
           </h1>
         </div>
@@ -27,21 +27,21 @@ function Nav() {
           })}
         </ul>
         <ul className="flex justify-between items-center text-xs">
-          <li className="mr-2">
+          <li className="mr-6">
             <img src={SearchIcon} alt="searchicon" />
           </li>
-          <li className="mr-2">
+          <li className="mr-6">
             <img src={AlertIcon} alt="searchicon" />
           </li>
-          <li className="rounded-full overflow-hidden mr-2">
+          <li className="rounded-full overflow-hidden">
             <img className="w-8" src={Profile} alt="profileimg" />
           </li>
-          <li className="flex justify-between items-center">
+          <li className="flex justify-between items-center before:content-[''] before:bg-[#e5e7eb] before:w-px before:h-5 before:mx-6 before:my-auto">
             <a
+              className="p-2 border-gray border-solid border rounded-full"
               href="/"
-              className="before:content-['|'] before:m-4 flex justify-between items-center border-gray border-solid border rounded-full"
             >
-              <p className="p-2">기업서비스</p>
+              기업서비스
             </a>
           </li>
         </ul>
