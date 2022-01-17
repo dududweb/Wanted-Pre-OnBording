@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-import MainSlideList from "./MainSlideList";
 import LeftArrow from "../../asset/images/slide/leftarrow.svg";
 import RightArrow from "../../asset/images/slide/rightarrow.svg";
 
@@ -12,27 +11,53 @@ function MainSlide({ data }) {
   const [nextButton, setNextButton] = useState(false);
   const [touchPosition, setTouchPosition] = useState(null);
 
-  const moveNextSlide = () => {};
+  const transform = 1024;
 
   return (
     <div className="relative slide overflow-hidden mx-auto px-20">
-      <div className=" flex justify-between items-center w-9540px">
+      <div className=" flex items-center w-9540px">
         {data &&
           data.map((list) => {
             return (
-              <MainSlideList
+              <div
+                className="max-w-screen-lg relative"
                 key={list.id}
-                title={list.slide_title}
-                contents={list.slide_contents}
-                image={list.img}
-              />
+                style={{
+                  transform: `translateX(${-transform * currentIndex}px)`,
+                }}
+              >
+                <div className="w-full">
+                  <img src={list.img} alt={list.slide_title} />
+                </div>
+                <div className="w-96 bg-white absolute bottom-10 left-10">
+                  <div className="p-10">
+                    <h2 className=" text-2xl font-bold">{list.slide_title}</h2>
+                    <h4>{list.slide_contents}</h4>
+                  </div>
+                  <div>
+                    <h4 className="text-blue-600 font-bold border-t px-10 py-4">
+                      <a href="/">바로가기 &gt; </a>
+                    </h4>
+                  </div>
+                </div>
+              </div>
             );
           })}
         <div className="bg w-10">
-          <button className="flex top-24 left-[calc(100%-1350px)] justify-center items-center absolute w-10 h-20 bg-slate-200 rounded-xl overflow-hidden opacity-1 ">
+          <button
+            className="flex top-24 left-[calc(100%-1350px)] justify-center items-center absolute w-10 h-20 bg-slate-200 rounded-xl overflow-hidden opacity-1"
+            onClick={() => {
+              setCurrentIndex((prevIndex) => prevIndex - 1);
+            }}
+          >
             <img className="leftArrowButton" src={LeftArrow} alt="왼쪽화살표" />
           </button>
-          <button className="flex top-24 right-[calc(100%-1350px)] justify-center items-center absolute w-10 h-20 bg-slate-200 rounded-xl overflow-hidden opacity-1 ">
+          <button
+            className="flex top-24 right-[calc(100%-1350px)] justify-center items-center absolute w-10 h-20 bg-slate-200 rounded-xl overflow-hidden opacity-1"
+            onClick={() => {
+              setCurrentIndex((prevIndex) => prevIndex + 1);
+            }}
+          >
             <img
               className="rightArrowButton"
               src={RightArrow}
