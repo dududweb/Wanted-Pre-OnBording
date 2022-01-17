@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 function MainSlideList({ title, contents, image }) {
   return (
-    <div className="max-w-screen-xl relative">
+    <div className="max-w-screen-lg relative">
       <div className="w-full">
         <img src={image} alt={title} />
       </div>
@@ -13,7 +13,7 @@ function MainSlideList({ title, contents, image }) {
         </div>
         <div>
           <h4 className="text-blue-600 font-bold border-t px-10 py-4">
-            <a href="/">바로가기 ></a>
+            <a href="/">바로가기 &gt; </a>
           </h4>
         </div>
       </div>
