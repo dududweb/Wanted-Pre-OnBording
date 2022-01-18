@@ -6,5 +6,6 @@
     width: 9540px;
   }
 }
+
 @tailwind components;
 @tailwind utilities;

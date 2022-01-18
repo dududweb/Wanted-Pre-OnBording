@@ -7,8 +7,6 @@ function MainSlide({ children }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lastDeck, setLastDeck] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
-  const [prevButton, setPrevButton] = useState(false);
-  const [nextButton, setNextButton] = useState(false);
   const [touchPosition, setTouchPosition] = useState(null);
 
   const slideRef = useRef(null);
@@ -22,10 +20,14 @@ function MainSlide({ children }) {
   const showSlide = () => {
     if (currentIndex > slideCount) {
       setCurrentIndex(0);
-    } else if (currentIndex < 1) {
+    } else if (currentIndex < 0) {
       setCurrentIndex(slideCount);
     }
   };
+
+  // currentIndex === 0 해당 ref를 slideCount를 앞에 붙여주고 순간이동
+  // currentIndex === 9(slideCount) 이면
+  //
 
   const next = () => {
     setCurrentIndex((prevIndex) => prevIndex + 1);
@@ -37,7 +39,7 @@ function MainSlide({ children }) {
 
   useEffect(() => {
     showSlide();
-  }, []);
+  }, [currentIndex]);
 
   const handleTouchStart = (e) => {
     const touchDown = e.touches[0].clientX;
@@ -76,7 +78,7 @@ function MainSlide({ children }) {
             return (
               <div
                 ref={slideRef}
-                className="slidelist relative max-w-screen-lg mr-10"
+                className="slidelist relative max-w-screen-lg mr-10 duration-500"
                 key={list.id}
                 style={{
                   transform: `translateX(${-SLIDE_WIDTH * currentIndex}px)`,
