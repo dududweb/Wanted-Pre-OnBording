@@ -119,11 +119,11 @@ function InfiniteCarousel({ children }) {
           >
             {length > show && isRepeating && renderExtraPrev()}
             {children &&
-              children.map((list) => {
+              children.map((list, index) => {
                 return (
                   <div
                     className="slidelist relative max-w-screen-lg mr-10"
-                    key={list.id}
+                    key={index}
                     style={{
                       transform: `translateX(-${currentIndex * (100 / show)}%)`,
                       transition: !transitionEnabled ? "none" : null,

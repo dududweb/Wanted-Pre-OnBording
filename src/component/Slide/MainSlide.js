@@ -1,102 +1,37 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import LeftArrow from "../../asset/images/slide/leftarrow.svg";
 import RightArrow from "../../asset/images/slide/rightarrow.svg";
 
 function MainSlide({ children }) {
-  const show = 9;
-  const [infiniteLoop, setInfiniteLoop] = useState(true);
-
-  const [currentIndex, setCurrentIndex] = useState(infiniteLoop ? show : 0);
-  const [length, setLength] = useState(children && children.length);
-
-  const [isRepeating, setIsRepeating] = useState(
-    children && infiniteLoop && children.length > show
-  );
-
-  const [transitionEnabled, setTransitionEnabled] = useState(true);
-
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [lastDeck, setLastDeck] = useState(0);
+  const [autoplay, setAutoplay] = useState(true);
+  const [prevButton, setPrevButton] = useState(false);
+  const [nextButton, setNextButton] = useState(false);
   const [touchPosition, setTouchPosition] = useState(null);
 
-  // Set the length to match current children from props
-  useEffect(() => {
-    setLength(children && children.length);
-    setIsRepeating(infiniteLoop && children.length > show);
-  }, [children, infiniteLoop, show]);
+  const slideRef = useRef(null);
 
-  useEffect(() => {
-    if (isRepeating) {
-      if (currentIndex === show || currentIndex === length) {
-        setTransitionEnabled(true);
-      }
-    }
-  }, [currentIndex, isRepeating, show, length]);
+  console.log(slideRef.current.style);
 
-  const next = () => {
-    if (isRepeating || currentIndex < length - show) {
-      setCurrentIndex((prevState) => prevState + 1);
-    }
+  const SLIDE_WIDTH = 1024;
+  const SLIDE_MARGIN = 20;
+  const MAX_SLIDES = 27;
+  const slideCount = children && children.length;
+
+  const setIntializePosition = () => {
+    slideRef.current.style.transition = `translateX(-${
+      (SLIDE_WIDTH + SLIDE_MARGIN) * (MAX_SLIDES - 1)
+    })px`;
   };
 
-  const prev = () => {
-    if (isRepeating || currentIndex > 0) {
-      setCurrentIndex((prevState) => prevState - 1);
-    }
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => prevIndex + 1);
   };
 
-  const handleTouchStart = (e) => {
-    const touchDown = e.touches[0].clientX;
-    setTouchPosition(touchDown);
-  };
-
-  const handleTouchMove = (e) => {
-    const touchDown = touchPosition;
-
-    if (touchDown === null) {
-      return;
-    }
-
-    const currentTouch = e.touches[0].clientX;
-    const diff = touchDown - currentTouch;
-
-    if (diff > 9) {
-      next();
-    }
-
-    if (diff < -9) {
-      prev();
-    }
-
-    setTouchPosition(null);
-  };
-
-  const handleTransitionEnd = () => {
-    if (isRepeating) {
-      if (currentIndex === 0) {
-        setTransitionEnabled(false);
-        setCurrentIndex(length);
-      } else if (currentIndex === length + show) {
-        setTransitionEnabled(false);
-        setCurrentIndex(show);
-      }
-    }
-  };
-
-  const renderExtraPrev = () => {
-    let output = [];
-    for (let index = 0; index < show; index++) {
-      output.push(children[length - 1 - index]);
-    }
-    output.reverse();
-    return output;
-  };
-
-  const renderExtraNext = () => {
-    let output = [];
-    for (let index = 0; index < show; index++) {
-      output.push(children[index]);
-    }
-    return output;
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => prevIndex - 1);
   };
 
   return (
@@ -106,11 +41,11 @@ function MainSlide({ children }) {
           children.map((list) => {
             return (
               <div
+                ref={slideRef}
                 className="slidelist relative max-w-screen-lg mr-10"
                 key={list.id}
                 style={{
-                  transform: `translateX(-${currentIndex * (100 / show)}%)`,
-                  transition: !transitionEnabled ? "none" : null,
+                  transform: `translateX(${-SLIDE_WIDTH * currentIndex}px)`,
                 }}
               >
                 <div className="w-full">
@@ -133,13 +68,13 @@ function MainSlide({ children }) {
         <div className="bg w-10">
           <button
             className="flex top-24 left-[calc(100%-1350px)] justify-center items-center absolute w-10 h-20 bg-slate-200 rounded-xl overflow-hidden opacity-1"
-            onClick={prev}
+            onClick={prevSlide}
           >
             <img className="leftArrowButton" src={LeftArrow} alt="왼쪽화살표" />
           </button>
           <button
             className="flex top-24 right-[calc(100%-1350px)] justify-center items-center absolute w-10 h-20 bg-slate-200 rounded-xl overflow-hidden opacity-1"
-            onClick={next}
+            onClick={nextSlide}
           >
             <img
               className="rightArrowButton"
