@@ -1,19 +1,19 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 
 import LeftArrow from "../../asset/images/slide/leftarrow.svg";
 import RightArrow from "../../asset/images/slide/rightarrow.svg";
 
 function MainSlide({ data }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [lastDeck, setLastDeck] = useState(0);
-  const [autoplay, setAutoplay] = useState(true);
-  const [prevButton, setPrevButton] = useState(false);
-  const [nextButton, setNextButton] = useState(false);
-  const [touchPosition, setTouchPosition] = useState(null);
+  // const [lastDeck, setLastDeck] = useState(0);
+  // const [autoplay, setAutoplay] = useState(true);
+  // const [prevButton, setPrevButton] = useState(false);
+  // const [nextButton, setNextButton] = useState(false);
+  // const [touchPosition, setTouchPosition] = useState(null);
 
   const slideWidth = 1024;
-  const sldieMargin = 20;
-  const slideCount = data && data.length;
+  // const sldieMargin = 20;
+  // const slideCount = data && data.length;
 
   // const isCurrentIndex =
 
@@ -25,7 +25,7 @@ function MainSlide({ data }) {
     setCurrentIndex((prevIndex) => prevIndex - 1);
   };
 
-  const makeClone = () => {};
+  // const makeClone = () => {};
 
   return (
     <div className="mx-auto px-20 overflow-hidden relative">
