@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import useAxios from "../../hook/useAxios";
 
 import MainSlide from "../../component/Slide/MainSlide";
