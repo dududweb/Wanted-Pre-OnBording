@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import LeftArrow from "../../asset/images/slide/leftarrow.svg";
 import RightArrow from "../../asset/images/slide/rightarrow.svg";
 
-function MainSlide({ children }) {
+function InfiniteCarousel({ children }) {
   const show = 9;
   const [infiniteLoop, setInfiniteLoop] = useState(true);
 
@@ -21,7 +21,7 @@ function MainSlide({ children }) {
   // Set the length to match current children from props
   useEffect(() => {
     setLength(children && children.length);
-    setIsRepeating(infiniteLoop && children.length > show);
+    setIsRepeating(children && infiniteLoop && children.length > show);
   }, [children, infiniteLoop, show]);
 
   useEffect(() => {
@@ -100,43 +100,67 @@ function MainSlide({ children }) {
   };
 
   return (
-    <div className="mx-auto px-20 overflow-hidden relative">
-      <div className="items-center w-9540px">
-        {children &&
-          children.map((list) => {
-            return (
-              <div
-                className="slidelist relative max-w-screen-lg mr-10"
-                key={list.id}
-                style={{
-                  transform: `translateX(-${currentIndex * (100 / show)}%)`,
-                  transition: !transitionEnabled ? "none" : null,
-                }}
-              >
-                <div className="w-full">
-                  <img src={list.img} alt={list.slide_title} />
-                </div>
-                <div className="w-96 bg-white absolute bottom-10 left-10">
-                  <div className="p-10">
-                    <h2 className=" text-2xl font-bold">{list.slide_title}</h2>
-                    <h4>{list.slide_contents}</h4>
+    <div className="w-full flex-col mx-auto px-20 overflow-hidden ">
+      <div className="flex w-full items-center relative">
+        {/* You can alwas change the content of the button to other things */}
+
+        <div
+          className="w-full h-full overflow-hidden"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+        >
+          <div
+            className={`flex show-${show}`}
+            style={{
+              transform: `translateX(-${currentIndex * (100 / show)}%)`,
+              transition: !transitionEnabled ? "none" : null,
+            }}
+            onTransitionEnd={() => handleTransitionEnd()}
+          >
+            {length > show && isRepeating && renderExtraPrev()}
+            {children &&
+              children.map((list) => {
+                return (
+                  <div
+                    className="slidelist relative max-w-screen-lg mr-10"
+                    key={list.id}
+                    style={{
+                      transform: `translateX(-${currentIndex * (100 / show)}%)`,
+                      transition: !transitionEnabled ? "none" : null,
+                    }}
+                  >
+                    <div className="w-full">
+                      <img src={list.img} alt={list.slide_title} />
+                    </div>
+                    <div className="w-96 bg-white absolute bottom-10 left-10">
+                      <div className="p-10">
+                        <h2 className=" text-2xl font-bold">
+                          {list.slide_title}
+                        </h2>
+                        <h4>{list.slide_contents}</h4>
+                      </div>
+                      <div>
+                        <h4 className="text-blue-600 font-bold border-t px-10 py-4">
+                          <a href="/">바로가기 &gt; </a>
+                        </h4>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-blue-600 font-bold border-t px-10 py-4">
-                      <a href="/">바로가기 &gt; </a>
-                    </h4>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        <div className="bg w-10">
+                );
+              })}
+            {length > show && isRepeating && renderExtraNext()}
+          </div>
+        </div>
+        {/* You can alwas change the content of the button to other things */}
+        {(isRepeating || currentIndex > 0) && (
           <button
-            className="flex top-24 left-[calc(100%-1350px)] justify-center items-center absolute w-10 h-20 bg-slate-200 rounded-xl overflow-hidden opacity-1"
+            className="w-10 flex top-24 left-[calc(100%-1350px)] justify-center items-center absolute w-10 h-20 bg-slate-200 rounded-xl overflow-hidden opacity-1"
             onClick={prev}
           >
             <img className="leftArrowButton" src={LeftArrow} alt="왼쪽화살표" />
           </button>
+        )}
+        {(isRepeating || currentIndex < length - show) && (
           <button
             className="flex top-24 right-[calc(100%-1350px)] justify-center items-center absolute w-10 h-20 bg-slate-200 rounded-xl overflow-hidden opacity-1"
             onClick={next}
@@ -147,10 +171,10 @@ function MainSlide({ children }) {
               alt="오른쪽화살표"
             />
           </button>
-        </div>
+        )}
       </div>
     </div>
   );
 }
 
-export default MainSlide;
+export default InfiniteCarousel;
