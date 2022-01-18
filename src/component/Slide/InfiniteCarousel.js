@@ -133,7 +133,7 @@ function InfiniteCarousel({ children }) {
                       <img src={list.img} alt={list.slide_title} />
                     </div>
                     <div className="w-96 bg-white absolute bottom-10 left-10">
-                      <div className="p-10">
+                      <div className="p-5">
                         <h2 className=" text-2xl font-bold">
                           {list.slide_title}
                         </h2>
