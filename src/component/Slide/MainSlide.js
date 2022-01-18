@@ -34,28 +34,24 @@ function MainSlide({ data }) {
           data.map((list) => {
             return (
               <div
-                className="slidelist max-w-screen-lg mr-10"
+                className="slidelist relative max-w-screen-lg mr-10"
                 key={list.id}
                 style={{
                   transform: `translateX(${-slideWidth * currentIndex}px)`,
                 }}
               >
-                <div>
-                  <h4 className="text-blue-600 font-bold border-t px-10 py-4">
-                    <a href="/">바로가기 &gt; </a>
-                  </h4>
-                </div>
-                <div className="w-full relative">
-                  <img
-                    className="absolute top-0 left-0"
-                    src={list.img}
-                    alt={list.slide_title}
-                  />
+                <div className="w-full">
+                  <img src={list.img} alt={list.slide_title} />
                 </div>
                 <div className="w-96 bg-white absolute bottom-10 left-10">
                   <div className="p-10">
                     <h2 className=" text-2xl font-bold">{list.slide_title}</h2>
                     <h4>{list.slide_contents}</h4>
+                  </div>
+                  <div>
+                    <h4 className="text-blue-600 font-bold border-t px-10 py-4">
+                      <a href="/">바로가기 &gt; </a>
+                    </h4>
                   </div>
                 </div>
               </div>
