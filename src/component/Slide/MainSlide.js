@@ -26,10 +26,12 @@ function MainSlide({ children }) {
 
   const next = () => {
     setCurrentIndex((prevIndex) => prevIndex + 1);
+    setAutoplay(false);
   };
 
   const prev = () => {
     setCurrentIndex((prevIndex) => prevIndex - 1);
+    setAutoplay(false);
   };
 
   useEffect(() => {
