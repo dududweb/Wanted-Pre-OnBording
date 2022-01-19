@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import useAxios from "../../hook/useAxios";
 
 import MainSlide from "../../component/Slide/MainSlide";
-import InfiniteCarousel from "../../component/Slide/InfiniteCarousel";
 
 function Main() {
   const url = "./data/slidedata.json";

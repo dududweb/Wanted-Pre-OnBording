@@ -6,7 +6,6 @@ import RightArrow from "../../asset/images/slide/rightarrow.svg";
 
 function MainSlide({ children }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [lastDeck, setLastDeck] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
   const [touchPosition, setTouchPosition] = useState(null);
 
@@ -14,7 +13,7 @@ function MainSlide({ children }) {
 
   const SLIDE_WIDTH = 1024;
   const slideCount = children && children.length;
-  const TOTAL_SLIDES = slideCount * 3;
+  // const TOTAL_SLIDES = slideCount * 3;
   const DELAY = 2000;
 
   const showSlide = () => {
@@ -24,10 +23,6 @@ function MainSlide({ children }) {
       setCurrentIndex(slideCount);
     }
   };
-
-  // currentIndex === 0 해당 ref를 slideCount를 앞에 붙여주고 순간이동
-  // currentIndex === 9(slideCount) 이면
-  //
 
   const next = () => {
     setCurrentIndex((prevIndex) => prevIndex + 1);
@@ -39,7 +34,7 @@ function MainSlide({ children }) {
 
   useEffect(() => {
     showSlide();
-  }, [currentIndex]);
+  });
 
   useInterval(
     () => {
@@ -75,9 +70,6 @@ function MainSlide({ children }) {
 
     setTouchPosition(null);
   };
-
-  console.log("currentIndex:", currentIndex);
-  console.log("slideCount:", slideCount);
 
   return (
     <div className="mx-auto px-20 overflow-hidden relative">
